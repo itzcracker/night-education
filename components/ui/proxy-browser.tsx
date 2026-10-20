@@ -16,14 +16,45 @@ function normalize(value: string) {
   }
 }
 
-function loadScript(src: string) {
-  return new Promise<void>((resolve, reject) => {
+function loadScript(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
     const existing = document.querySelector(`script[src="${src}"]`);
-    if (existing) return resolve();
+    if (existing) {
+      // Wait for existing script to define globals
+      const checkGlobals = setInterval(() => {
+        const w = window as any;
+        // If we loaded controller, check for $scramjetController
+        if (src.includes("controller") && w.$scramjetController) {
+          clearInterval(checkGlobals);
+          resolve();
+        }
+        // If we loaded scramjet, check for $scramjet
+        if (src.includes("scramjet.js") && w.$scramjet) {
+          clearInterval(checkGlobals);
+          resolve();
+        }
+      }, 50);
+      setTimeout(() => {
+        clearInterval(checkGlobals);
+        resolve();
+      }, 5000);
+      return;
+    }
+
     const script = document.createElement("script");
     script.src = src;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error(`Could not load ${src}`));
+    let loaded = false;
+
+    script.onload = () => {
+      loaded = true;
+      // Wait a tick for globals to be set
+      setTimeout(resolve, 100);
+    };
+
+    script.onerror = () => {
+      if (!loaded) reject(new Error(`Could not load ${src}`));
+    };
+
     document.head.appendChild(script);
   });
 }
@@ -31,43 +62,71 @@ function loadScript(src: string) {
 export default function ProxyBrowser({ query = "" }: { query?: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const frameRef = useRef<any>(null);
+  const initRef = useRef<Promise<any> | null>(null);
   const [input, setInput] = useState(query);
   const [status, setStatus] = useState("Starting proxy…");
   const [error, setError] = useState("");
 
   async function start() {
-    if (frameRef.current) return frameRef.current;
-    setError("");
-    try {
-      await loadScript("/scramjet/scramjet.js");
-      await loadScript("/controller/controller.api.js");
-      const loadModule = new Function("path", "return import(path)") as (path: string) => Promise<any>;
-      const epoxy = await loadModule("/libcurl/index.mjs");
-      const w = window as any;
-      if (!w.$scramjet || !w.$scramjetController) {
-        throw new Error(`Proxy runtime did not load: ${[!w.$scramjet && "$scramjet", !w.$scramjetController && "$scramjetController"].filter(Boolean).join(", ")}`);
-      }
-      const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/" });
-      await navigator.serviceWorker.ready;
-      const Transport = (epoxy as any).default || (epoxy as any).EpoxyTransport;
-      if (!Transport) throw new Error("Proxy transport did not load");
-      const transport = new Transport({ wisp: WISP_URL });
-      await transport.init();
-      const controller = new w.$scramjetController.Controller({
-        serviceworker: registration.active || navigator.serviceWorker.controller,
-        transport,
-        scramjetConfig: w.$scramjet.defaultConfig,
-      });
-      await controller.wait();
-      frameRef.current = controller.createFrame(iframeRef.current);
-      setStatus("Ready");
-      return frameRef.current;
-    } catch (cause) {
-      const message = cause instanceof Error ? cause.message : String(cause);
-      setStatus("Proxy unavailable");
-      setError(message);
-      throw cause;
+    // Reuse initialization if already in progress or completed
+    if (initRef.current) {
+      return initRef.current;
     }
+
+    if (frameRef.current) return frameRef.current;
+
+    const initPromise = (async () => {
+      setError("");
+      try {
+        // Load scramjet first, wait for $scramjet global
+        await loadScript("/scramjet/scramjet.js");
+        const w = window as any;
+        if (!w.$scramjet) {
+          throw new Error("$scramjet global not initialized after loading scramjet.js");
+        }
+
+        // Then load controller, wait for $scramjetController global
+        await loadScript("/controller/controller.api.js");
+        if (!w.$scramjetController) {
+          throw new Error("$scramjetController global not initialized after loading controller.api.js");
+        }
+
+        // Load transport
+        await loadScript("/epoxy.js");
+        const Transport = (window as any).EpoxyTransport?.default || (window as any).EpoxyTransport;
+        if (!Transport) throw new Error("EpoxyTransport did not load");
+
+        // Register service worker first
+        const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" });
+        await registration.update();
+        await navigator.serviceWorker.ready;
+
+        // Initialize transport
+        const transport = new Transport({ wisp: WISP_URL });
+        await transport.init();
+
+        // Create controller
+        const controller = new w.$scramjetController.Controller({
+          serviceworker: registration.active || navigator.serviceWorker.controller,
+          transport,
+          scramjetConfig: w.$scramjet.defaultConfig,
+        });
+        await controller.wait();
+
+        // Create frame
+        frameRef.current = controller.createFrame(iframeRef.current);
+        setStatus("Ready");
+        return frameRef.current;
+      } catch (cause) {
+        const message = cause instanceof Error ? cause.message : String(cause);
+        setStatus("Proxy unavailable");
+        setError(message);
+        throw cause;
+      }
+    })();
+
+    initRef.current = initPromise;
+    return initPromise;
   }
 
   async function go(value: string) {
@@ -78,19 +137,23 @@ export default function ProxyBrowser({ query = "" }: { query?: string }) {
       const frame = await start();
       frame.go(url);
       setStatus("Loading…");
-    } catch {
-      const fallback = value.includes(".") ? normalize(value) : `${DEFAULT_SEARCH}${encodeURIComponent(value.trim())}`;
-      if (iframeRef.current) iframeRef.current.src = fallback;
-      setError("");
-      setStatus("Direct search fallback");
+      window.setTimeout(() => {
+        if (frameRef.current === frame) {
+          setStatus("Retrying connection…");
+          frame.go(url);
+        }
+      }, 1800);
+    } catch (cause) {
+      setStatus("Proxy error");
+      setError(cause instanceof Error ? cause.message : "Unknown error");
     }
   }
 
   useEffect(() => {
-    if (query) void go(query);
-    else void start();
+    void start();
     return () => {
       frameRef.current = null;
+      initRef.current = null;
     };
     // The proxy should boot once when the browser tab mounts.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -107,8 +170,8 @@ export default function ProxyBrowser({ query = "" }: { query?: string }) {
         <input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Search with Brave or enter a URL" className="min-w-0 flex-1 rounded-full bg-white/[.06] px-4 py-2 text-sm text-white outline-none placeholder:text-[#8a91aa]" aria-label="Web search" />
         <button type="submit" className="rounded-full bg-[var(--primary)] px-4 py-2 text-xs font-semibold text-[#161126]">Go</button>
       </form>
-      <div className="flex items-center gap-2 px-4 py-2 text-xs text-[#9ca6bf]"><span className="size-2 rounded-full bg-[var(--primary)]" />{status}{error && <span className="text-red-300">{error}</span>}</div>
-      <iframe ref={iframeRef} title="Nightfall web proxy" className="min-h-0 flex-1 border-0 bg-white" />
+      <div className="flex items-center gap-2 px-4 py-2 text-xs text-[#9ca6bf]"><span className="size-2 rounded-full bg-[var(--primary)]" />{status}{error && <span className="text-red-300">: {error}</span>}</div>
+      <iframe ref={iframeRef} title="Nightfall web proxy" className="min-h-0 flex-1 border-0 bg-white" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-pointer-lock" />
     </div>
   );
 }
