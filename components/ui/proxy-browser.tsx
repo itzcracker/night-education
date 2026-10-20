@@ -66,6 +66,7 @@ export default function ProxyBrowser({ query = "" }: { query?: string }) {
   const [input, setInput] = useState(query);
   const [status, setStatus] = useState("Starting proxy…");
   const [error, setError] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   async function start() {
     // Reuse initialization if already in progress or completed
@@ -135,6 +136,7 @@ export default function ProxyBrowser({ query = "" }: { query?: string }) {
     setInput(value);
     try {
       const frame = await start();
+      setLoaded(false);
       frame.go(url);
       setStatus("Loading…");
       window.setTimeout(() => {
@@ -170,8 +172,11 @@ export default function ProxyBrowser({ query = "" }: { query?: string }) {
         <input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Search with Brave or enter a URL" className="min-w-0 flex-1 rounded-full bg-white/[.06] px-4 py-2 text-sm text-white outline-none placeholder:text-[#8a91aa]" aria-label="Web search" />
         <button type="submit" className="rounded-full bg-[var(--primary)] px-4 py-2 text-xs font-semibold text-[#161126]">Go</button>
       </form>
-      <div className="flex items-center gap-2 px-4 py-2 text-xs text-[#9ca6bf]"><span className="size-2 rounded-full bg-[var(--primary)]" />{status}{error && <span className="text-red-300">: {error}</span>}</div>
-      <iframe ref={iframeRef} title="Nightfall web proxy" className="min-h-0 flex-1 border-0 bg-white" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-pointer-lock" />
+      <div className="flex items-center gap-2 px-4 py-2 text-xs text-[#9ca6bf]"><span className="size-2 rounded-full bg-[var(--primary)]" />{status}{error && <span className="truncate text-red-300">: {error}</span>}</div>
+      <div className="relative min-h-0 flex-1 overflow-hidden bg-[#080b18]">
+        {!loaded && <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[radial-gradient(circle_at_50%_35%,rgba(187,169,255,.12),transparent_42%),#080b18] text-center"><div className="size-10 animate-pulse rounded-2xl border border-[var(--primary)]/30 bg-[var(--primary)]/10" /><p className="text-sm text-[#9ca6bf]">{error ? "The proxy could not load this page." : "Connecting to the night web…"}</p><button type="button" onClick={() => { initRef.current = null; frameRef.current = null; setError(""); setStatus("Retrying…"); void go(input) }} className="rounded-full bg-[var(--primary)] px-4 py-2 text-xs font-semibold text-[#161126]">Retry</button></div>}
+        <iframe ref={iframeRef} title="Nightfall web proxy" onLoad={() => { setLoaded(true); setStatus("Ready") }} className="size-full border-0 bg-transparent" />
+      </div>
     </div>
   );
 }
