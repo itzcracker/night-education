@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@theme inline { --color-background: var(--background); --color-foreground: var(--foreground); --color-border: var(--border); --color-muted-foreground: var(--muted-foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --radius-xl: 1rem; --radius-2xl: 1.35rem; }
+:root { --background:#070a14; --foreground:#edf2ff; --border:rgba(163,157,255,.12); --muted-foreground:#8a91aa; --primary:#bba9ff; --primary-foreground:#161126; }
+* { box-sizing:border-box; border-color:var(--border); }
+html,body { min-height:100%; background:var(--background); color:var(--foreground); }
+body { font-family: Arial, Helvetica, sans-serif; overflow:hidden; }
+button,input { font:inherit; }
+::selection { background:#a994ff55; color:#fff; }
+@keyframes float { from { transform:translateY(0) rotate(-8deg); } to { transform:translateY(-12px) rotate(8deg); } }
+@keyframes shimmer { 0%,100% { opacity:.25 } 50% { opacity:.9 } }
+.fog { background:radial-gradient(ellipse at 50% 46%, #8067d51c 0%, transparent 48%), radial-gradient(ellipse at 70% 80%, #4037a51a, transparent 42%); }
+.script { font-family: 'Brush Script MT', 'Segoe Script', cursive; font-style:italic; font-weight:700; letter-spacing:-.08em; }
