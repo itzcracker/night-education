@@ -152,7 +152,8 @@ export default function ProxyBrowser({ query = "" }: { query?: string }) {
   }
 
   useEffect(() => {
-    void start();
+    if (query) void go(query);
+    else void start();
     return () => {
       frameRef.current = null;
       initRef.current = null;
