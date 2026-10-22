@@ -737,9 +737,3 @@ export default function PixelTrail({
     </div>
   );
 }
-
-
-.pixel-canvas {
-  position: absolute;
-  z-index: 1;
-}
