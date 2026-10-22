@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import './MetaBalls.css';
+import './metaballs.css';
 
 const MAX_BALLS = 50;
 const SLOTS = MAX_BALLS + 1;
