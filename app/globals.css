@@ -23,3 +23,16 @@ button:hover, a:hover { transform: translateY(-1px); }
 @keyframes dock-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } }
 .script { font-family: 'Lufga', Arial, sans-serif; font-style:normal; font-weight:700; letter-spacing:-.08em; }
+.theme-midnight { --background:#07111f; }
+.theme-void { --background:#12081d; }
+.theme-abyss { --background:#080b2b; }
+.theme-ember { --background:#1b0d08; }
+.theme-synthwave { --background:#18091e; }
+.theme-mono { --background:#151515; --foreground:#f2f2f2; }
+.theme-custom { --background:#071a18; }
+.theme-midnight aside,.theme-midnight section,.theme-midnight .shortcut-dock { background-color:rgba(6,18,34,.92); }
+.theme-void aside,.theme-void section,.theme-void .shortcut-dock { background-color:rgba(22,8,34,.92); }
+.theme-ember aside,.theme-ember section,.theme-ember .shortcut-dock { background-color:rgba(35,13,7,.92); }
+.theme-synthwave aside,.theme-synthwave section,.theme-synthwave .shortcut-dock { background-color:rgba(31,7,38,.92); }
+.theme-mono aside,.theme-mono section,.theme-mono .shortcut-dock { background-color:rgba(24,24,24,.94); }
+.group > .relative > span { display:none; }

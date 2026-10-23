@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-const WISP_URL = process.env.NEXT_PUBLIC_WISP_URL || "https://new-education-for-you.onrender.com/";
+const WISP_URL = "wss://new-education-for-you.onrender.com/wisp/";
 const DEFAULT_SEARCH = "https://search.brave.com/search?q=";
 
 function normalize(value: string) {
@@ -167,13 +167,24 @@ export default function ProxyBrowser({ query = "" }: { query?: string }) {
     void go(input);
   }
 
+  function navigate(action: "back" | "forward" | "reload") {
+    const frame = frameRef.current;
+    if (!frame) return;
+    if (action === "back") frame.back?.();
+    if (action === "forward") frame.forward?.();
+    if (action === "reload") frame.reload?.();
+  }
+
   return (
     <div className="flex h-full min-h-0 w-full flex-col">
       <form onSubmit={submit} className="flex gap-2 border-b border-white/[.06] p-3">
+        <button type="button" onClick={() => navigate("back")} className="rounded-full px-2 text-[#a5acc1] hover:bg-white/10" aria-label="Back">‹</button>
+        <button type="button" onClick={() => navigate("forward")} className="rounded-full px-2 text-[#a5acc1] hover:bg-white/10" aria-label="Forward">›</button>
+        <button type="button" onClick={() => navigate("reload")} className="rounded-full px-2 text-[#a5acc1] hover:bg-white/10" aria-label="Reload">↻</button>
         <input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Search with Brave or enter a URL" className="min-w-0 flex-1 rounded-full bg-white/[.06] px-4 py-2 text-sm text-white outline-none placeholder:text-[#8a91aa]" aria-label="Web search" />
         <button type="submit" className="rounded-full bg-[var(--primary)] px-4 py-2 text-xs font-semibold text-[#161126]">Go</button>
       </form>
-      <div className="flex items-center gap-2 px-4 py-2 text-xs text-[#9ca6bf]"><span className="size-2 rounded-full bg-[var(--primary)]" />{status}{error && <span className="truncate text-red-300">: {error}</span>}</div>
+      <div className="flex items-center gap-2 px-4 py-2 text-xs text-[#9ca6bf]">{status}{error && <span className="truncate text-red-300">: {error}</span>}</div>
       <div className="relative min-h-0 flex-1 overflow-hidden bg-[#080b18]">
         {!loaded && <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[radial-gradient(circle_at_50%_35%,rgba(187,169,255,.12),transparent_42%),#080b18] text-center"><div className="size-10 animate-pulse rounded-2xl border border-[var(--primary)]/30 bg-[var(--primary)]/10" /><p className="text-sm text-[#9ca6bf]">{error ? "The proxy could not load this page." : "Connecting to the night web…"}</p><button type="button" onClick={() => { initRef.current = null; frameRef.current = null; setError(""); setStatus("Retrying…"); void go(input) }} className="rounded-full bg-[var(--primary)] px-4 py-2 text-xs font-semibold text-[#161126]">Retry</button></div>}
         <iframe ref={iframeRef} title="Nightfall web proxy" onLoad={() => { setLoaded(true); setStatus("Ready") }} className="size-full border-0 bg-transparent" />
