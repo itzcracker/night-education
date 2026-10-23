@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-const WISP_URL = process.env.NEXT_PUBLIC_WISP_URL || "wss://scramjet-app-uyja.onrender.com/wisp/";
+const WISP_URL = process.env.NEXT_PUBLIC_WISP_URL || "https://new-education-for-you.onrender.com/";
 const DEFAULT_SEARCH = "https://search.brave.com/search?q=";
 
 function normalize(value: string) {
