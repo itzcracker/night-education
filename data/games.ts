@@ -38,6 +38,7 @@ export const games: Game[] = [
   game('kirby-soft-and-wet', 'Kirby: Soft and Wet', '/game-covers/kirby.png'),
   game('mario-kart-64', 'Mario Kart 64', '/game-covers/mario64.png'),
   game('minecraft-pocket-edition', 'Minecraft Pocket Edition', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/minecraftpocketedition.png-XkRInTkYE9JvhLcomUKLC9BBYkMtJa.jpeg'),
+  game('minecraft-eaglercraft', 'Minecraft Eaglercraft', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Minecraft%20_Holiday_Game.png-HYFR805MttIaUwBICOk5DEnAs8kdu8.avif'),
   game('monkey-mart', 'Monkey Mart', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/monkeymart.png-huVz4j7s3BKocE68nsNEDCn2VG2Vlc.jpeg'),
   game('papas-burgeria', "Papa's Burgeria", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/burgeriia.png-MLUJ2GGbz0jf9xB2iXUFtmtJT3HoQI.jpeg'),
   game('papas-cheeseria', "Papa's Cheeseria", '/game-covers/cheeseria.png'),
