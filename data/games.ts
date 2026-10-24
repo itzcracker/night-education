@@ -3,7 +3,7 @@ export type Game = { slug: string; title: string; cover: string; path: string }
 const game = (slug: string, title: string, cover: string): Game => ({ slug, title, cover, path: `/games/${slug}.html` })
 
 export const games: Game[] = [
-  game('1v1-lol', '1v1.LOL', '/game-covers/1v1lol.png'),
+  game('1v1-lol', '1v1.LOL', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1v1loll.png-7HBFcWUwE5GiIsjQWAJiT96jUJATsR.avif'),
   game('among-us', 'Among Us', '/game-covers/amongus.png'),
   game('angry-birdsspace', 'Angry Birds Space', '/game-covers/angrybs.png'),
   game('baby-sniper-in-vietnam', 'Baby Sniper in Vietnam', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/babysniperinvietnam.png-0BhwridJVPysJkMlnAqN30XQavYDmi.jpeg'),
