@@ -42,7 +42,6 @@ export const games: Game[] = [
   game('johnny-trigger', 'Johnny Trigger', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/johnnytrigger.png-kdumVdagw2eIVgkwtAVGGkWXdGjLoQ.avif'),
   game('karlson', 'Karlson', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/karlson-pcUyO1qbmKs5KKm1EQUvDkFRLhfYay.png'),
   game('kirby-soft-and-wet', 'Kirby: Soft and Wet', '/game-covers/kirby.png'),
-  game('kitten-cannon', 'Kitten Cannon', '/game-covers/fnaf.png'),
   game('learn-to-fly', 'Learn to Fly', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/learntofly-xQAWLdHbEWkobQJXH3mQk9LmpiYSwi.png'),
   game('learn-to-fly-2', 'Learn to Fly 2', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/learn-to-fly-2.png-bvJdxoTDUUoRNCqCGnJnguGIwyudSq.jpeg'),
   game('learn-to-fly-3', 'Learn to Fly 3', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/learntofly3.png-Xq3sDde0gBP6LXo6LNrPimUYdD0OmQ.jpeg'),
