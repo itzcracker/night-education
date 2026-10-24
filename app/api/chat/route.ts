@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-const allowed = new Set(['dots-studio/dots-3-note-preview:free','poolside/laguna-s-2.1:free','nvidia/nemotron-3.5-super-vl:free'])
+const allowed = new Set(['dots-studio/dots-3-note-preview:free','recursive/flint-v1.0:free','poolside/laguna-s-2.1:free','nvidia/nemotron-3.5-super-vl:free'])
 
 export async function POST(request: Request) {
   try {
