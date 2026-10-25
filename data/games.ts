@@ -32,7 +32,7 @@ export const games: Game[] = [
   game('dadish', 'Dadish', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dadish.png-chwTJZkfwTm8GVXkOQcdTk8Ayivu99.jpeg'),
   game('dan-the-man', 'Dan the Man', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dantheman.png-trXSeAm34IH7MBLX3EaIQ1PQyxX3Yx.jpeg'),
   game('five-nights-at-candys', "Five Nights at Candy's", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fivenightsatcandys.png-Ve2QPPwo1IU6hBAOz1TU57IrJa2Hwy.webp'),
-  game('fnaf-ultimate-custom-night', "Five Nights at Freddy's: Ultimate Custom Night", '/game-covers/fnaf-ultimate-custom-night.png'),
+  game('ultimate-custom-night', "Ultimate Custom Night", '/game-covers/fnaf-ultimate-custom-night.png'),
   game('fnaf', "Five Nights at Freddy's", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fnaf1.png-7IGqIU1xts9dHfdmY8nHcB2UaLEKb9.jpeg'),
   game('fnaf-2', "Five Nights at Freddy's 2", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fnaf-2.png-l3KjIBi9QvzpgKOY2i6kxrRChHJehP.jpeg'),
   game('fnaf-3', "Five Nights at Freddy's 3", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fnaf3.png-JU0b332V0OVnnLk87lEZuiasuLjPeS.webp'),
