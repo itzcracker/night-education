@@ -5,4 +5,4 @@ minimumReleaseAgeExclude:
   - next
 
 allowBuilds:
-  '@mercuryworkshop/scramjet': set this to true or false
+  '@mercuryworkshop/scramjet': true
