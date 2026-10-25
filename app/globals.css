@@ -36,3 +36,9 @@ button:hover, a:hover { transform: translateY(-1px); }
 .theme-synthwave aside,.theme-synthwave section,.theme-synthwave .shortcut-dock { background-color:rgba(31,7,38,.92); }
 .theme-mono aside,.theme-mono section,.theme-mono .shortcut-dock { background-color:rgba(24,24,24,.94); }
 .group > .relative > span { display:none; }
+.nightfall-surprise { position:fixed; inset:0; z-index:100; display:grid; place-items:center; overflow:hidden; background:rgba(0,0,0,.82); animation:nightfall-overlay-in .5s ease-out forwards, nightfall-overlay-out .4s ease-in 2.5s forwards; pointer-events:none; }
+.nightfall-surprise-image { max-width:min(86vw,900px); max-height:82vh; border-radius:1.25rem; object-fit:contain; box-shadow:0 24px 80px rgba(0,0,0,.55); animation:nightfall-image-in .5s cubic-bezier(.2,1.35,.4,1) forwards, nightfall-image-out .4s ease-in 2.5s forwards; }
+@keyframes nightfall-overlay-in { from { opacity:0; } to { opacity:1; } }
+@keyframes nightfall-overlay-out { from { opacity:1; } to { opacity:0; } }
+@keyframes nightfall-image-in { from { opacity:0; transform:translateY(100vh) scale(.82); } 72% { opacity:1; transform:translateY(-18px) scale(1.02); } to { opacity:1; transform:translateY(0) scale(1); } }
+@keyframes nightfall-image-out { from { opacity:1; transform:translateY(0) scale(1); } to { opacity:0; transform:translateY(12px) scale(.98); } }
