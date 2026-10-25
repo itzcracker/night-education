@@ -2,7 +2,9 @@ export type Game = { slug: string; title: string; cover: string; path: string }
 
 const game = (slug: string, title: string, cover: string): Game => ({ slug, title, cover, path: `/games/${slug}.html` })
 
-export const games: Game[] = [
+const addedGameCover = '/game-covers/amongus.png'
+
+const gameCatalog: Game[] = [
   game('1v1-lol', '1v1.LOL', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1v1loll.png-7HBFcWUwE5GiIsjQWAJiT96jUJATsR.avif'),
   game('8-ball-pool', '8 Ball Pool', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-ball-pool.png-eG2NGUkzRfqPbGi7Pnl3Imo6w88PVf.avif'),
   game('among-us', 'Among Us', '/game-covers/amongus.png'),
@@ -107,4 +109,24 @@ export const games: Game[] = [
   game('web-dashers', 'Web Dashers', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/web-dashers-4snaAtWYpSeXX0loAnGvFvdg3STT3x.png'),
   game('webfishing', 'Webfishing', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/webfishing-WtWZTYSagacYPEJI5SzcWNR0psOLiL.png'),
   game('wordle', 'Wordle', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/wordle.png-z3XZjYW3O1zEMVWWYAnOLCGopYOaFF.webp'),
+  game('cloverpit', 'CloverPit', addedGameCover),
+  game('customer-support', 'Customer Support', addedGameCover),
+  game('fireboy-and-watergirl', 'Fireboy and Watergirl', addedGameCover),
+  game('gang-beasts', 'Gang Beasts', addedGameCover),
+  game('going-balls', 'Going Balls', addedGameCover),
+  game('hobo-4', 'Hobo 4', addedGameCover),
+  game('hollow-knight-silksong', 'Hollow Knight: Silksong', addedGameCover),
+  game('how-to-fish', 'How to Fish', addedGameCover),
+  game('kindergarten-3', 'Kindergarten 3', addedGameCover),
+  game('little-alchemy-2', 'Little Alchemy 2', addedGameCover),
+  game('peaks-of-yore', 'Peaks of Yore', addedGameCover),
+  game('pizza-tower', 'Pizza Tower', addedGameCover),
+  game('pou', 'Pou', addedGameCover),
+  game('shift-at-midnight', 'Shift at Midnight', addedGameCover),
+  game('stardew-valley', 'Stardew Valley', addedGameCover),
+  game('tabs', 'Totally Accurate Battle Simulator', addedGameCover),
+  game('tiletopia', 'Tiletopia', addedGameCover),
+  game('volley-random', 'Volley Random', addedGameCover),
 ]
+
+export const games = [...gameCatalog].sort((a, b) => a.title.localeCompare(b.title))
