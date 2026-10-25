@@ -73,7 +73,7 @@ export const games: Game[] = [
   game('papas-pizzeria', "Papa's Pizzeria", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/papaspizzeria.png-Gq27JHQj9BcMwwvnS35aZ2IwGsmWOz.jpeg'),
   game('papas-scooperia', "Papa's Scooperia", '/game-covers/scooperia.png'),
   game('papas-sushiria', "Papa's Sushiria", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/papassushiria.png-vsQmlueVksyUKpievfVhMLkBNb95Zh.jpeg'),
-  game('papas-tacomia', "Papa's Tacomia", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/papastacomia.png-SAQwkbJWPyF8v98pqZb7cPgtb9Oa2c.jpeg'),
+  game('papas-tacomia', "Papa's Taco Mia", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/papastacomia.png-SAQwkbJWPyF8v98pqZb7cPgtb9Oa2c.jpeg'),
   game('papas-wingeria', "Papa's Wingeria", 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/papaswingeria.png-vHFbCmVnb7kYaaLiKh4PiKjqFAZ7Tw.jpeg'),
   game('paper-io-3d', 'Paper.io 3D', '/game-covers/paper3d.png'),
   game('plants-vs-zombies', 'Plants vs. Zombies', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/plantsvszombies.png-ekPNM55PvpCbymKuW4FCtYu8DvhoCj.webp'),
