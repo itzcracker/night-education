@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'IXL | Math, Language Arts, Science, Social Studies, and Spanish',
   generator: '',
   icons: {
-    icon: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/nightfall-high-resolution-logo%20%281%29-Ej3WMkEG8aPI24ozcBPWAKm789Ah0t.png',
+    icon: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%20%289%29-3jEQatgdHtQejKTQXkiHAM9xl80Qmq.png',
   },
 }
 export const viewport: Viewport = { colorScheme: 'dark', themeColor: '#070a14', userScalable: false }
