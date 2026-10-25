@@ -2,8 +2,6 @@ export type Game = { slug: string; title: string; cover: string; path: string }
 
 const game = (slug: string, title: string, cover: string): Game => ({ slug, title, cover, path: `/games/${slug}.html` })
 
-const addedGameCover = '/game-covers/amongus.png'
-
 const gameCatalog: Game[] = [
   game('1v1-lol', '1v1.LOL', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1v1loll.png-7HBFcWUwE5GiIsjQWAJiT96jUJATsR.avif'),
   game('8-ball-pool', '8 Ball Pool', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-ball-pool.png-eG2NGUkzRfqPbGi7Pnl3Imo6w88PVf.avif'),
@@ -109,24 +107,24 @@ const gameCatalog: Game[] = [
   game('web-dashers', 'Web Dashers', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/web-dashers-4snaAtWYpSeXX0loAnGvFvdg3STT3x.png'),
   game('webfishing', 'Webfishing', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/webfishing-WtWZTYSagacYPEJI5SzcWNR0psOLiL.png'),
   game('wordle', 'Wordle', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/wordle.png-z3XZjYW3O1zEMVWWYAnOLCGopYOaFF.webp'),
-  game('cloverpit', 'CloverPit', addedGameCover),
-  game('customer-support', 'Customer Support', addedGameCover),
-  game('fireboy-and-watergirl', 'Fireboy and Watergirl', addedGameCover),
-  game('gang-beasts', 'Gang Beasts', addedGameCover),
-  game('going-balls', 'Going Balls', addedGameCover),
-  game('hobo-4', 'Hobo 4', addedGameCover),
-  game('hollow-knight-silksong', 'Hollow Knight: Silksong', addedGameCover),
-  game('how-to-fish', 'How to Fish', addedGameCover),
-  game('kindergarten-3', 'Kindergarten 3', addedGameCover),
-  game('little-alchemy-2', 'Little Alchemy 2', addedGameCover),
-  game('peaks-of-yore', 'Peaks of Yore', addedGameCover),
-  game('pizza-tower', 'Pizza Tower', addedGameCover),
-  game('pou', 'Pou', addedGameCover),
-  game('shift-at-midnight', 'Shift at Midnight', addedGameCover),
-  game('stardew-valley', 'Stardew Valley', addedGameCover),
-  game('tabs', 'Totally Accurate Battle Simulator', addedGameCover),
-  game('tiletopia', 'Tiletopia', addedGameCover),
-  game('volley-random', 'Volley Random', addedGameCover),
+  game('cloverpit', 'CloverPit', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cloverpit.png-kW5rCq5c5envmmVLrbbNftNAoO2FX0.jpeg'),
+  game('customer-support', 'Customer Support', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/customersupport-yqJBPy5rrCy18BADCpdiynQoUb8A6Z.png'),
+  game('fireboy-and-watergirl', 'Fireboy and Watergirl', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fireboyandwatergirl.png-PbVtAJyw08kIzFiZCct6zqS0L4DU7p.jpeg'),
+  game('gang-beasts', 'Gang Beasts', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gangbeasts.png-QbB3kzE6NQYjb3a8eA1YJM4lv0zBGH.avif'),
+  game('going-balls', 'Going Balls', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/going-balls-dwDaVzB3MZyrwAdA1i8H8O8cIwRwJH.png'),
+  game('hobo-4', 'Hobo 4', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hobo4-XrSGsoPQdLTLjlYAOr90gPJq3DIX9W.png'),
+  game('hollow-knight-silksong', 'Hollow Knight: Silksong', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HollowKnightSilksong.png-tAtYD2hRjtQOVB8UQUfZzDolZOnerR.jpeg'),
+  game('how-to-fish', 'How to Fish', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/howtofish.png-jatfbrXRc4hQRHhldJaG3DWZtzEQ9v.jpeg'),
+  game('kindergarten-3', 'Kindergarten 3', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kindergarten3.png-k1fWl9idFz7m3SiTF7sMGjzHCYlkPq.webp'),
+  game('little-alchemy-2', 'Little Alchemy 2', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/littlealchemy2.png-dVmYSgfnodgCqint6FH9595Tc1NQcT.jpeg'),
+  game('peaks-of-yore', 'Peaks of Yore', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/peaksofyore.png-RRGxWLPQIIjoV3ww2MDyMfN27c4mWA.jpeg'),
+  game('pizza-tower', 'Pizza Tower', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pizzatower.png-mvDgU4QzlmOLUwffGsZYXhCjksWUaF.jpeg'),
+  game('pou', 'Pou', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Pou.png-e7pPGj3pU7RwdYrF2cJuHsHjkBDGaq.jpeg'),
+  game('shift-at-midnight', 'Shift at Midnight', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/shiftatmidnight.png-4HElRiC5FuI5W0ignHFLB5Dd6Wg7SE.jpeg'),
+  game('stardew-valley', 'Stardew Valley', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/stardewvalley.png-Q8NmXhGNeTAiuw4g12he2tcpTxW2E1.jpeg'),
+  game('tabs', 'Totally Accurate Battle Simulator', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tabs.png-4qN3eQXOwZSKjObJRsPoK1QRHUuoAr.avif'),
+  game('tiletopia', 'Tiletopia', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tiletopia-uFLnCvwoAzAeinl7irS3iCIhmTvPpQ.png'),
+  game('volley-random', 'Volley Random', 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/volley-random.png-TZJLPssw2qCMLzrFTQzCnngLE9bTh4.avif'),
 ]
 
 export const games = [...gameCatalog].sort((a, b) => a.title.localeCompare(b.title))
