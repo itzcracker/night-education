@@ -3,16 +3,21 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 
 const WISP_URL = "wss://new-education-for-you.onrender.com/wisp/";
-const DEFAULT_SEARCH = "https://search.brave.com/search?q=";
+const SEARCH_ENGINES = {
+  Brave: "https://search.brave.com/search?q=",
+  Google: "https://www.google.com/search?q=",
+  DuckDuckGo: "https://duckduckgo.com/?q=",
+  Ecosia: "https://www.ecosia.org/search?q=",
+} as const;
 
-function normalize(value: string) {
+function normalize(value: string, searchEngine: keyof typeof SEARCH_ENGINES = "Brave") {
   const input = value.trim();
   if (!input) return "";
   try {
     return new URL(input).toString();
   } catch {
     if (/^[\w.-]+\.[a-z]{2,}(\/.*)?$/i.test(input)) return `https://${input}`;
-    return `${DEFAULT_SEARCH}${encodeURIComponent(input)}`;
+    return `${SEARCH_ENGINES[searchEngine]}${encodeURIComponent(input)}`;
   }
 }
 
@@ -59,7 +64,7 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
-export default function ProxyBrowser({ query = "" }: { query?: string }) {
+export default function ProxyBrowser({ query = "", searchEngine = "Brave" }: { query?: string; searchEngine?: keyof typeof SEARCH_ENGINES }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const frameRef = useRef<any>(null);
   const initRef = useRef<Promise<any> | null>(null);
@@ -131,7 +136,7 @@ export default function ProxyBrowser({ query = "" }: { query?: string }) {
   }
 
   async function go(value: string) {
-    const url = normalize(value);
+    const url = normalize(value, searchEngine);
     if (!url) return;
     setInput(value);
     try {
