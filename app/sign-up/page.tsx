@@ -1,15 +1,22 @@
 'use client'
 
 import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function SignUpPage() {
   const [nickname, setNickname] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
+  const router = useRouter()
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setMessage(nickname.trim() && password.length >= 8 ? 'Registration is ready for the connected account service.' : 'Enter a nickname and a password of at least 8 characters.')
+    if (!nickname.trim() || password.length < 8) {
+      setMessage('Enter a nickname and a password of at least 8 characters.')
+      return
+    }
+    localStorage.setItem('nightfall_user', nickname.trim())
+    router.push('/')
   }
 
   return (
