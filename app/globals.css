@@ -28,6 +28,8 @@ button:hover, a:hover { transform: translateY(-1px); }
 .theme-abyss { --background:#080b2b; }
 .theme-ember { --background:#1b0d08; }
 .theme-synthwave { --background:#18091e; }
+ .theme-halloween { --background:#160b09; --primary:#ff7a18; --primary-foreground:#1c0b04; --border:rgba(255,122,24,.18); }
+ .theme-halloween aside,.theme-halloween section,.theme-halloween .shortcut-dock { background-color:rgba(28,12,7,.94); }
 .theme-mono { --background:#151515; --foreground:#f2f2f2; }
 .theme-custom { --background:#071a18; }
 .theme-midnight aside,.theme-midnight section,.theme-midnight .shortcut-dock { background-color:rgba(6,18,34,.92); }
