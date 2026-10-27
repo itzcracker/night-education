@@ -9,7 +9,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Bot, ChevronLeft, ChevronRight, Ci
 type Page = 'home' | 'games' | 'ai' | 'settings' | 'browser' | 'music'
 type Tab = { id: string; page: Page; game?: Game }
 const accents = [{n:'Cloud',c:'#f5f4f2'},{n:'Strawberry',c:'#ffb9c2'},{n:'Tangerine',c:'#ffc889'},{n:'Banana',c:'#ffef86'},{n:'Lime',c:'#9af0bd'},{n:'Mint',c:'#b8ffde'},{n:'Blueberry',c:'#a8c9ff'},{n:'Grape',c:'#abbcff'},{n:'Plum',c:'#d6b4ff'},{n:'Bubblegum',c:'#f6b6df'},{n:'Raspberry',c:'#ffb9c5'},{n:'Slate',c:'#d6dfeb'}]
-const themes = [{n:'Nightfall',c:'#bba9ff'},{n:'Midnight',c:'#72b8ff'},{n:'Void',c:'#8f4cff'},{n:'Abyss',c:'#5451ed'},{n:'Ember',c:'#ff7418'},{n:'Synthwave',c:'#e172ff'},{n:'Mono',c:'#e5e5e5'},{n:'Custom',c:'#b8ffde'}]
+const themes = [{n:'Nightfall',c:'#bba9ff'},{n:'Midnight',c:'#72b8ff'},{n:'Void',c:'#8f4cff'},{n:'Abyss',c:'#5451ed'},{n:'Ember',c:'#ff7418'},{n:'Synthwave',c:'#e172ff'},{n:'Halloween',c:'#ff7a18'},{n:'Mono',c:'#e5e5e5'},{n:'Custom',c:'#b8ffde'}]
 const shortcuts = [{name:'TikTok',image:'/covers/shortcut-tiktok.png',url:'https://www.tiktok.com/'},{name:'YouTube',image:'/covers/shortcut-youtube.png',url:'https://youtube.com'},{name:'Discord',image:'/covers/shortcut-discord.png',url:'https://discord.com/app'},{name:'X/Twitter',image:'/covers/shortcut-x.png',url:'https://x.com/'},{name:'GeForce NOW',image:'/covers/shortcut-geforce.png',url:'https://play.geforcenow.com/'},{name:'GeoGuessr',image:'/covers/shortcut-geoguessr.png',url:'https://www.geoguessr.com'},{name:'WorldGuessr',image:'/covers/shortcut-worldguessr.png',url:'https://www.worldguessr.com/'}]
 
 

@@ -103,8 +103,18 @@ export default function ProxyBrowser({ query = "", searchEngine = "Brave" }: { q
         if (!Transport) throw new Error("EpoxyTransport did not load");
 
         // Register service worker first
-        const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" });
+        const registration = await navigator.serviceWorker.register("/sw.js?v=2", { scope: "/", updateViaCache: "none" });
         await registration.update();
+        if (registration.installing) {
+          await new Promise<void>((resolve, reject) => {
+            const worker = registration.installing;
+            const onStateChange = () => {
+              if (worker.state === "activated") { worker.removeEventListener("statechange", onStateChange); resolve(); }
+              if (worker.state === "redundant") { worker.removeEventListener("statechange", onStateChange); reject(new Error("Proxy service worker became redundant")); }
+            };
+            worker.addEventListener("statechange", onStateChange);
+          });
+        }
         await navigator.serviceWorker.ready;
 
         // Initialize transport
